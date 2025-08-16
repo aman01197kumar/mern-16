@@ -1,0 +1,55 @@
+Git and Github
+
+1. Set username and email(command prompt)
+git config --global user.name "abc"
+git config --global user.email "abc@gmail.com"
+
+2. Check setup(vs code)
+git config --list
+
+3. After github created
+git clone url_of_repo
+(if any case, git clone does not work on powershell and it will work on git bash)
+
+4. To check the current repo
+git remote -v
+
+
+5. Git repository creation and pushing the code for the first time.
+git init(initialization of git)
+git add .(adding files to the stage)
+git commit -m "commit message"
+git branch -M main
+git remote add origin <repo_url>
+git push -u origin main
+
+3. Existing repo
+git add .
+git commit -m "commit message"
+git push origin <b_n>
+
+6. Creating branch and merging
+git branch(to check created branches)
+git branch <b_n>(create a new branch)
+git branch -M <nb_n>(renaming branch)
+git branch -D <b_n>(deleting branch)
+git checkout <b_n>(enter the branch)
+
+7. After working on branch.
+git add .
+git commit -m "commit message"
+git checkout main
+git merge <b_n>
+
+8.After merging branch with main. For fetching changes from main
+git checkout <b_n>
+git merge 	
+
+9. git log(to check all the commits)
+     git reflog(to log all the commits even happened in future)
+
+10. git status(to check the current status of code)
+11. retrieve data from github
+git pull origin main
+
+
