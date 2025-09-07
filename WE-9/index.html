@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const arr = []
+
+        // console.log(typeof arr);
+        // console.log([].length===[].length)
+        // const name = "aman"
+        // name = 'raman'
+
+
+        // //length
+        // console.log(arr.length)
+
+        // //push
+        // arr.push(9)
+        // console.log(arr, 'push');
+
+        // //pop
+        // arr.pop()
+        // arr.pop()
+        // console.log(arr, 'pop');
+
+        // //shift
+        // arr.shift()
+        // console.log(arr);
+
+        // //unshift
+        // arr.unshift(12)
+        // console.log(arr);
+
+        // const arr2 = [2, 8, 3]
+
+        //slice
+
+        // const slicedArr = arr.slice(1, 5)
+        // console.log(arr.slice(1, 5),'slice');
+        // console.log(slicedArr, 'slicedArr');
+        // console.log(arr, 'arr');
+
+        // splice
+        // console.log(arr.splice(1, 3));
+        // arr.splice(1,1,144)
+        // console.log(arr);
+        // console.log(arr===arr);
+        // console.log(arr==arr2);
+        // console.log([2,3,9]=='2,3,8')
+
+        // const str = 'hello world'
+        // //[he,o,_,wor,d]
+        // const newStr = str.split('l')
+        // console.log(newStr,'new');
+        // const joinStr = newStr.join('')
+        // console.log(joinStr, 'join');
+
+
+        // // const arr = [2, 1, 5, 7, 8, 3]
+        // const str = 'hello worlld'
+        // console.log(str.split(' ').reverse().join(''));
+
+        const obj = {
+            Student_name: 'Aman',
+            age: 200,
+            isStudent: true,
+            address: {
+                city: "abc",
+                state: "pqr"
+            },
+            hobbies: [1, 2, 3, 4],
+            best_friends: [{
+                name: "a",
+                age: 250
+            },
+            {
+                name: "b",
+                age: 9
+            },
+            {
+                name: "c",
+                age: 25
+            },]
+        }
+
+        // console.log(obj.address.state);
+        // console.log(obj.hobbies);
+        // console.log(obj.best_friends[1].name);
+
+        //ES6=>destructuring
+
+        const { Student_name, hobbies, best_friends } = obj
+        // console.log(Student_name, hobbies, best_friends);
+
+        // for (let i = 0; i < best_friends.length; i++) {
+        //     console.log(best_friends[i].name);
+        // }
+
+        // const [a,b,c] = best_friends
+        // console.log(a);
+
+        //ES6 =>rest and spread operators(...)
+
+        // const arr = [1, 2, 4, 5]
+        // const arr3 = [...arr, ...arr2] //spread
+
+        // console.log(arr3);
+
+        // const [a, b, c] = arr
+        // console.log(a, 'a', b, 'b', c, 'c');
+
+        // const [a,b,...c,d] = arr //rest
+        // console.log(c);
+
+        //shallow copy
+        // const shallow = {...newObj}
+        // shallow.name = "Ramesh"
+        // shallow.address.city = "lucknow"
+
+        // console.log(shallow);
+        // console.log(newObj);
+
+        //deep copy
+        // const deep = JSON.parse(JSON.stringify(newObj))
+
+        // deep.name = "Vivek"
+        // deep.address.city = "Bangalore"
+
+        // console.log(deep);
+        // console.log(newObj);
+        // console.log(typeof JSON.stringify(newObj));
+
+        const newObj = {
+            name: "aman",
+            address: {
+                city: 'delhi'
+            }
+        }
+
+
+        // const arr2 = [3, 1, 4, 8]
+        // for (let elem in newObj) {
+        //     console.log(newObj[elem]);
+        // }
+
+        // for(let elem in newObj){
+        //     console.log(newObj[elem]);
+        // }
+
+        // for(let elem of newObj){
+        //     console.log(elem);
+        // }
+        // for(let elem of arr2){
+        //     console.log(elem);
+        // }
+
+        // const findOccurance = (arr) => {
+        //     const bucket = {}
+        //     for (let elem of arr) {
+        //         if (bucket[elem])
+        //             bucket[elem] += 1
+        //         else bucket[elem] = 1
+        //     }
+        //     return bucket
+        // }
+        // console.log(findOccurance(arr));
+
+        //function as an argument=>callback function
+
+        // const add = (a, b) => a + b
+        // const minus = (a, b) => a - b
+        // const multiply = (a, b) => a * b
+        // const divide = (a, b) => a / b
+
+        // const arithmetic = (x, y, cb) => cb(x, y)
+
+        // console.log(arithmetic(200, 300, add));
+
+        // console.log(arithmetic(2, 3, multiply));
+
+        // console.log((2,3)=>2+3);
+
+
+        //Higher order function
+        //function taking another as an argument
+        // const arithmetic = (x, y, cb) => cb(x, y)
+
+        // Note: cb works as callback function and arithmetic works as HOF
+
+        //function returning another function=>currying
+
+        // function abc(a) {
+        //     return function (b) {
+        //         return function (c) {
+        //             return a + b + c
+        //         }
+        //     }
+        // }
+        // console.log(abc(1)(2)(3));
+        // function abc(a,b,c){
+        //     return a+b+c
+        // }
+        // console.log(abc(1,2));
+
+        const arr = [1, 2, 1, 5, 3, 6, 4, 3]
+        //map
+        // const mappedArr = arr.map((elem) => elem * 2)
+        // console.log(mappedArr, 'map');
+
+        //filter
+        // const filteredArr = arr.filter((elem) => elem % 2 === 0)
+        // console.log(filteredArr, 'filter');
+
+        //reduce
+        // const reducedVal = arr.reduce((acc, curr) => {
+        //     acc += curr
+        //     return acc
+        // })
+        // console.log(reducedVal);
+
+        // const even = []
+        // arr.forEach((elem) => {
+        //     if (elem % 2 === 0)
+        //         even.push(elem)
+        // })
+        // console.log(even);
+
+        const mappedArr = arr.map((elem) => elem * 5).filter((elem) => elem % 2 === 0).reduce((acc, curr) => {
+            acc += curr
+            return acc
+        })
+
+        console.log(mappedArr);
+    </script>
+</body>
+
+</html>
