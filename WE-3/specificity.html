@@ -4,54 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Specificity</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h1 {
+            background-color: red;
+        }
+    </style>
 </head>
-<style>
-    /* em */
-    /* #parent{
-        font-size: 10px;
-    } */
-    /* #child{
-        font-size: 1em;
-    } */
-
-    /* rem */
-    /* #rem-value {
-        font-size: 1rem;
-    } */
-
-    *{
-        margin: 0;
-    }
-    /* percent */
-    #parent_per {
-        background-color: red;
-    }
-
-    #child_per {
-        background-color: yellow;
-        width: 50%;
-        
-        font-size: 2rem;
-    }
-
-    /* viewport */
-    /* #viewport {
-        width: 100vw;
-        height: 100vh;
-        background-color: red;
-    } */
-</style>
 
 <body>
-    <!-- <div id="parent">
-        <p id="child">Hello world!!!</p>
-    </div> -->
-    <!-- <p id="rem-value">This is rem</p> -->
-    <div id="parent_per">
-        <p id="child_per">this is percent</p>
-    </div>
-    <!-- <div id="viewport"></div> -->
+    <h1 id="hello" class="hii">Hello</h1>
+    <p id="hello" class="hii">cnjsdbnujcnbj</p>
+    <script>
+        const hello = document.getElementById('hello')
+        console.log(hello);
+        const hii = document.getElementsByClassName('hii')
+        console.log(hii);
+    </script>
 </body>
 
 </html>

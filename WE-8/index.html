@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // abc()
+        // function abc() {
+        //     console.log('hiii');
+        // }
+
+        // let a = 10
+        // function outer() {
+        //     function inner() {
+        //         console.log(a);
+
+        //     }
+        //     inner()
+        // }
+        // outer()
+
+        function outer() {
+            function inner() {
+                console.log(a);
+            }
+            let a = 10
+            inner()
+        }
+        // console.log(outer());
+
+        const res = outer()
+        console.log(res());
+
+        // function outer() {
+        //     function inner() {
+        //         const a = 101
+        //         console.log(a);
+        //     }
+        //     inner()
+        // }
+        // outer()
+
+
+    </script>
+</body>
+
+</html>
