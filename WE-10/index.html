@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const bakeBread = (statement,callback)=>{
+        //     console.log(statement)
+        //     callback()
+        // }
+
+        // const stuffying = (statement,callback)=>{
+        //     console.log(statement);
+        //     callback()
+        // }
+
+        // const grilling = (statement,callback)=>{
+        //     console.log(statement);
+        //     callback()
+        // }
+
+        // bakeBread('baked',()=>{
+        //     stuffying('stuffed',()=>{
+        //         grilling('grilled',()=>{
+        //             console.log('ready to serve');
+        //         })
+        //     })
+        // })
+
+        // console.log(1);
+        // console.log(2);
+        // setTimeout(() => console.log(3), 2000)
+        // console.log(4);
+        // setTimeout(() => console.log(5), 0)
+        // console.log(6);
+        //124563 124653
+
+        // setTimeout(()=>console.log('hello there'),0)
+        // setTimeout(()=>console.log('print'),0)
+
+
+        // const promise = new Promise((resolve, reject) => {
+        //     const x = 6
+        //     if (x === 5)
+        //         return resolve()
+
+        //     return reject()
+        // })
+
+        // // console.log(promise);
+        // promise.then(() => console.log('succesful')).catch(() => console.log('failed'))
+
+        // const checkData = new Promise((resolve, reject) => {
+        //     const x = "hii"
+        //     if (x === 'hii')
+        //         return resolve(x)
+
+        //     return reject('i am not able to find you!!!')
+        // })
+
+        // checkData
+        // .then(response => console.log(response))
+        // .catch(respons => console.log(respons))
+
+        const bakeBread = (statement) => {
+
+            return new Promise((resolve, reject) => {
+                if (statement) {
+                    setTimeout(() => {
+                        console.log(statement);
+                        resolve()
+                    }, 1000)
+                }
+                else reject('bread ingredients not found!!!')
+            })
+        }
+
+        const stuffying = (statement) => {
+            return new Promise((resolve, reject) => {
+                if (statement) {
+                    setTimeout(() => {
+                        console.log(statement);
+                        resolve()
+                    }, 3000)
+                }
+                else reject('bread not found!!!')
+            })
+        }
+
+        const grilling = (statement) => {
+            return new Promise((resolve, reject) => {
+                if (statement) {
+                    setTimeout(() => {
+                        console.log(statement);
+                        resolve()
+                    }, 2000)
+                }
+                else reject('stuffying not done!!!')
+            })
+        }
+
+        // bakeBread('baked')
+        //     .then(() => stuffying('stuffed'))
+        //     // .then(() => grilling('grilled'))
+        //     .then(() => console.log('ready to serve'))
+        //     .catch(err => console.log(err))
+
+        const myRest = async () => {
+            try {
+
+                await bakeBread('baked')
+                await stuffying('stuffed')
+                await grilling('grilled')
+                console.log('ready to serve');
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+        myRest()
+
+        // const userId = (id) => { return 'gfg' }
+        // const userName = (name) => 112
+
+        // const myData = async () => {
+        //     try {
+        //         const name =await userName('aman')
+        //         const id =await userId(name)
+        //         return id
+        //     }
+        //     catch (err) {
+        //         console.log(err);
+        //     }
+        // }
+
+        // const fetchData = async () => {
+        //     try{
+
+        //         const data =await fetch('https://jsonplaceholder.typicode.com/users')
+        //         return data.json()
+        //     }
+        //     catch(err){
+        //         console.log(err);
+        //     }
+        // }
+        // fetchData().then((result) => {
+        //     console.log(result);
+        // }).catch((err) => {
+
+        // });
+
+        //1error  1 3 2 123
+    </script>
+</body>
+
+</html>
