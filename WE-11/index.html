@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <button onclick="clickMe()">click me</button> -->
+    <!-- <div id="container_id">
+        Hello world
+        <p class="items">1</p>
+        <p class="items">2</p>
+        <p class="items">3</p>
+        <p class="items">4</p>
+        <p class="items">5</p>
+    </div> -->
+    <!-- <div id="content">100</div> -->
+    <!-- <div id="content">200</div>
+    <div id="content">300</div>
+    <div id="content">400</div>
+    <div id="content">500</div> -->
+
+    <!-- event bubbling and event capturing -->
+    <!-- <div id="grandparent">
+        grandparent
+        <div id="parent">
+            parent
+            <div id="child">child</div>
+        </div>
+    </div> -->
+
+    <!-- event delegation -->
+    <!-- <div id="calculator">
+        <p class="numbers">1</p>
+        <p class="numbers">2</p>
+        <p class="numbers">3</p>
+        <p class="numbers">4</p>
+        <p class="numbers">5</p>
+        <p class="numbers">6</p>
+        <p class="numbers">7</p>
+        <p class="numbers">8</p>
+        <p class="numbers">9</p>
+        <p class="numbers">0</p>
+        <p class="numb">1000</p>
+    </div> -->
+    <script>
+        // const clickMe = () => console.log('click me');
+        // console.log(document);
+        // console.log(window);
+        // alert('hiii')
+        // console.log(document.getElementById('content'));
+        // console.log(document.getElementsByClassName('items'));
+        // console.log(document.getElementsByTagName('div'));
+        // console.log(document.querySelectorAll('.items'));
+        // console.log(document.getElementById('content').innerText);
+        // const arr = document.querySelectorAll('.items')
+        // for(let i=0;i<arr.length;i++){
+        //     console.log(arr[i].innerText);
+        // }
+
+        // console.log(document.getElementById('container_id').innerHTML, 'innerHTML');
+        // console.log(document.getElementById('container_id').innerText);
+
+        // const val=document.getElementById('content')
+        // val.style.backgroundColor = 'red'
+
+        // val.innerHTML = 'hiiii'
+
+        // const grandparent = document.getElementById('grandparent')
+        // const parent = document.getElementById('parent')
+        // const child = document.getElementById('child')
+
+        // grandparent.addEventListener('click', (e) => {
+        //     e.stopPropagation()
+        //     // console.log(e, 'event');
+        //     console.log('grandparent called');
+        // })
+
+        // parent.addEventListener('mouseover', (e) => {
+        //     e.stopPropagation()
+        //     console.log('parent called');
+        // })
+        // child.addEventListener('mouseover', (e) => {
+        //     e.stopPropagation()
+        //     console.log('child called');
+        // })
+
+        // //addEventListener(event_handler,function)
+
+        // let count = 0
+
+        // grandparent.addEventListener('mouseover', (e) => {
+
+        //     e.stopPropagation()
+        //     count++
+        //     console.log(count);
+        // })
+
+        // grandparent.addEventListener('click', (e) => {
+        //     e.stopPropagation()
+        //     // console.log(e, 'event');
+        //     console.log('grandparent called');
+        // }, false)
+
+        // parent.addEventListener('click', (e) => {
+        //     e.stopPropagation()
+        //     console.log('parent called');
+        // }, false)
+        // child.addEventListener('click', (e) => {
+        //     e.stopPropagation()
+        //     console.log('child called');
+        // }, false)
+
+        // const calculator = document.getElementById('calculator')
+
+        // calculator.addEventListener('click', (e) => {
+        //     if (e.target.classList.contains('numbers')) {
+        //         console.log(e.target.innerText);
+        //     }
+        //     // console.log(e.target.classList);
+        // })
+
+
+    </script>
+</body>
+
+</html>

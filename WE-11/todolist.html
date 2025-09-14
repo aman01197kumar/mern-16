@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <input type="text" id="input">
+        <button id="addBtn">Add</button>
+        <button id="dltAll">deleteAll</button>
+        <ul id="todos">
+
+        </ul>
+    </main>
+    <script>
+        const addBtn = document.getElementById('addBtn')
+        const todos = document.getElementById('todos')
+
+        addBtn.addEventListener('click', () => {
+            const input = document.getElementById('input')
+            // console.log(input);
+            const list = document.createElement('li')
+            const task = document.createElement('h3')
+            const dlt = document.createElement('button')
+            task.innerText = input.value
+            dlt.innerText = 'delete'
+            list.style.display = 'flex'
+            list.style.backgroundColor = 'yellow'
+            list.appendChild(task)
+            list.appendChild(dlt)
+            todos.appendChild(list)
+            input.value = ''
+            dlt.addEventListener('click', () => {
+                list.remove()
+            })
+
+        })
+    </script>
+</body>
+
+</html>
