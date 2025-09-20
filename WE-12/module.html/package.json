@@ -1,0 +1,23 @@
+{
+  "name": "mern-16",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aman01197kumar/mern-16.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aman01197kumar/mern-16/issues"
+  },
+  "homepage": "https://github.com/aman01197kumar/mern-16#readme",
+  "description": "",
+  "dependencies": {
+    "uuid": "^13.0.0"
+  }
+}
