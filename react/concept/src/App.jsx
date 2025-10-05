@@ -1,7 +1,10 @@
 
-import Props from './WE-14/props/Props'
-import Styling from './WE-14/styling/Styling'
-import UseEffect from './WE-14/useEffect/UseEffect'
+import Parent from './WE-15/liftingupstate/Parent'
+import UseCallback from './WE-15/UseCallback/UseCallBack'
+import PostOffice from './WE-15/UseContext/PostOffice'
+import Usememo from './WE-15/usememo/Usememo'
+import DataFetching from './WE-16/DataFetching'
+import UseRef from './WE-16/UseRef'
 
 const App = () => {
   const btn = ['subscription', 'login', 'signup', 'cknksjnk']
@@ -16,7 +19,13 @@ const App = () => {
     // <Usestate/>
     // <Props/>
     // <Styling />
-    <UseEffect />
+    // <UseEffect />
+    // <PostOffice />
+    // <Parent/>
+    // <Usememo/>
+    // <UseCallback/>
+    // <UseRef />
+    <DataFetching />
   )
 }
 
