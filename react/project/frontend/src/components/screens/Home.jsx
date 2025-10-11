@@ -8,6 +8,7 @@ import Card from '../utilities/Card'
 const Home = () => {
   const [data, setData] = useState([])
   const navigate = useNavigate()
+  const [product, setProduct] = useState({})
 
   const fetchData = async () => {
     const response = await axios.get('https://dummyjson.com/products')
@@ -22,7 +23,14 @@ const Home = () => {
       <div className='grid md:grid-cols-3 gap-5'>
         {
           data?.map(({ id, title, images, price, description }) => (
-            <Card images={images} title={title} price={price} description={description} id={id} />
+
+            <Card images={images} 
+            title={title} 
+            price={price} 
+            description={description} 
+            id={id} 
+            setProduct={setProduct} />
+
           ))
         }
       </div>
