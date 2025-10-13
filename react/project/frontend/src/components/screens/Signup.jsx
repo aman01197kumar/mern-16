@@ -1,11 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 
 const Signup = () => {
+  // const [contact, setContact] = useState(null)
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [myDetails, setMyDetails] = useState({
+    firstName: '',
+    lastName: '',
+    contact: null,
+    email: '',
+    password: '',
+  })
 
   const navigate = useNavigate()
+
+  // const emailHandler = (e) => setEmail(e.target.value)
+  // const passwordHandler = (e) => setPassword(e.target.value)
+  const confirmPasswordHandler = (e) => setConfirmPassword(e.target.value)
+  // const firstNameHandler = (e) => setFirstName(e.target.value)
+  // const lastNameHandler = (e) => setLastName(e.target.value)
+  // const contactHandler = (e) => setContact(e.target.value)
+
+  const loginHandler = () => {
+
+
+    const { firstName, lastName, contact, email, password } = myDetails
+    if (firstName.length < 4 || lastName.length < 4 || contact.length < 4 || email.length < 4 || password.length < 4 || confirmPassword.length < 4) {
+      toast.error('check the inputs!!!')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('passwords do not match')
+      return
+    }
+    const regex = /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/;
+    if (!regex.test(email)) {
+      toast.success('success')
+      
+    }
+    else 
+      toast.error('fill the correct email')
+    // navigate('/login')
+  }
+
   return (
-    <form className="max-w-md mx-auto">
+    <div className="max-w-md mx-auto">
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
@@ -14,6 +59,8 @@ const Signup = () => {
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required=""
+          // onChange={(e) => emailHandler(e)}
+          onChange={(e) => setMyDetails(prev => ({ ...prev, email: e.target.value }))}
         />
         <label
           htmlFor="floating_email"
@@ -30,6 +77,8 @@ const Signup = () => {
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required=""
+          // onChange={passwordHandler}
+          onChange={(e) => setMyDetails(prev => ({ ...prev, password: e.target.value }))}
         />
         <label
           htmlFor="floating_password"
@@ -46,6 +95,9 @@ const Signup = () => {
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required=""
+          // onChange={(e) => setMyDetails(prev => ({ ...prev, confirmPassword: e.target.value }))}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+
         />
         <label
           htmlFor="floating_repeat_password"
@@ -63,6 +115,7 @@ const Signup = () => {
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required=""
+            onChange={(e) => setMyDetails(prev => ({ ...prev, firstName: e.target.value }))}
           />
           <label
             htmlFor="floating_first_name"
@@ -79,6 +132,7 @@ const Signup = () => {
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required=""
+            onChange={(e) => setMyDetails(prev => ({ ...prev, lastName: e.target.value }))}
           />
           <label
             htmlFor="floating_last_name"
@@ -98,6 +152,8 @@ const Signup = () => {
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required=""
+            // onChange={contactHandler}
+            onChange={(e) => setMyDetails(prev => ({ ...prev, contact: e.target.value }))}
           />
           <label
             htmlFor="floating_phone"
@@ -106,7 +162,7 @@ const Signup = () => {
             Phone number (123-456-7890)
           </label>
         </div>
-        <div className="relative z-0 w-full mb-5 group">
+        {/* <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
             name="floating_company"
@@ -121,15 +177,16 @@ const Signup = () => {
           >
             Company (Ex. Google)
           </label>
-        </div>
+        </div> */}
       </div>
       <button
-        onClick={() => navigate('/login')}
+        onClick={loginHandler}
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Submit
       </button>
-    </form>
+      <Toaster />
+    </div>
 
   )
 }
