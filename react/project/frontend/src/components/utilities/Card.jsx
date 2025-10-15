@@ -1,95 +1,135 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addProducts, displayProductDetails } from '../../redux/products'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProducts, displayProductDetails } from '../../redux/products';
+import { useNavigate } from 'react-router-dom';
+import { Star } from 'lucide-react';
 
-const Card = ({ id, title, images, price, description, setProduct }) => {
-    const dispatch = useDispatch()
-    const { products } = useSelector(state => state.productSlice)
-    const navigate = useNavigate()
+const Card = ({
+    id,
+    availabilityStatus,
+    title,
+    brand,
+    category,
+    description,
+    dimensions,
+    images,
+    price,
+    rating,
+    reviews,
+    tags
+}) => {
+    const dispatch = useDispatch();
+    const { products } = useSelector(state => state.productSlice);
 
-    const addedToCart = products.some(item => item.title === title)
+    const navigate = useNavigate();
 
-    const showProductDetails = () => {
+    const addedToCart = products.some(item => item.id === id);
 
+    const showProductDetails = (id,
+        title,
+        images,
+        price,
+        availabilityStatus,
+        brand,
+        category,
+        description,
+        dimensions,
+        rating,
+        reviews,
+        tags) => {
         dispatch(displayProductDetails({
             id: id,
             title: title,
-            image: images[0],
+            images: images,
             price: price,
-            description: description
-        }))
-        navigate(`/product-detail/${id}`)
-    }
+            availabilityStatus: availabilityStatus,
+            brand: brand,
+            category: category,
+            description: description,
+            dimensions: dimensions,
+            rating: rating,
+            reviews: reviews,
+            tags: tags
+        }));
+        navigate(`/product-details/${title}`);
+    };
+
     return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 
-            <img className="rounded-t-lg" src={images[0]} alt="" />
+        <div className="max-w-sm bg-white rounded-2xl shadow-md overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105 dark:bg-gray-800 dark:border-gray-700 border border-gray-200">
 
-            <div className="p-5">
+            {/* Image */}
+            <div className="relative">
+                <img className="w-full h-52 object-cover rounded-t-2xl" src={images?.[0]} alt={title} />
+                {availabilityStatus?.toLowerCase() !== 'in stock' && (
+                    <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-md">
+                        Out of Stock
+                    </span>
+                )}
+            </div>
 
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {/* Content */}
+            <div className="p-5 flex flex-col gap-3">
+                <h5 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2">
                     {title}
                 </h5>
 
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                     {description}
                 </p>
-                <p className="mb-3 font-bold text-gray-700 dark:text-gray-400">
-                    Rs. {price}
-                </p>
 
-                <div className='flex justify-between'>
+                {/* Price & Rating */}
+                <div className="flex justify-between items-center mt-1">
+                    <span className="text-xl font-bold text-gray-800 dark:text-gray-100">₹{price}</span>
+                    <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                            <Star
+                                key={i}
+                                size={16}
+                                className={`${i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+                            />
+                        ))}
+                    </div>
+                </div>
 
+                {/* Buttons */}
+                <div className="flex justify-between mt-4">
                     <button
+
                         type="button"
                         disabled={addedToCart}
-                        className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white ${addedToCart ? "bg-gray-700" : "bg-blue-700"} rounded-lg ${!addedToCart ? "bg-blue-700" : null} focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
-                        onClick={() => dispatch(addProducts({ id: id, title: title, image: images[0], price: price }))}
+                        onClick={() =>
+                            dispatch(addProducts({ id: id, title: title, image: images[0], price }))
+                        }
+                        className={`px-4 py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-200 ${addedToCart
+                            ? 'bg-gray-400 cursor-not-allowed'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                            }`}
                     >
-                        {addedToCart ? 'Added to Cart' : 'Add to Cart'}
-                        <svg
-                            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 14 10"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M1 5h12m0 0L9 1m4 4L9 9"
-                            />
-                        </svg>
+                        {addedToCart ? 'Added' : 'Add to Cart'}
                     </button>
-                    <div
-                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        onClick={showProductDetails}
+
+                    <button
+                        onClick={() => showProductDetails(id,
+                            title,
+                            images,
+                            price,
+                            availabilityStatus,
+                            brand,
+                            category,
+                            description,
+                            dimensions,
+                            rating,
+                            reviews,
+                            tags)}
+                        className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg flex items-center gap-2 transition-colors duration-200"
                     >
-                        Product Detail
-                        <svg
-                            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 14 10"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M1 5h12m0 0L9 1m4 4L9 9"
-                            />
-                        </svg>
-                    </div>
+                        View Details
+                    </button>
                 </div>
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default Card
+export default Card;

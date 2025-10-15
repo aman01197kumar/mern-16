@@ -31,22 +31,20 @@ const Signup = () => {
 
     const { firstName, lastName, contact, email, password } = myDetails
     if (firstName.length < 4 || lastName.length < 4 || contact.length < 4 || email.length < 4 || password.length < 4 || confirmPassword.length < 4) {
-      toast.error('check the inputs!!!')
-      return
+      return toast.error('check the inputs!!!')
+
     }
 
     if (password !== confirmPassword) {
-      toast.error('passwords do not match')
-      return
+      return toast.error('passwords do not match')
+
     }
     const regex = /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/;
     if (!regex.test(email)) {
-      toast.success('success')
-      
+      return toast.error('fill the correct email')
+
     }
-    else 
-      toast.error('fill the correct email')
-    // navigate('/login')
+    navigate('/login')
   }
 
   return (

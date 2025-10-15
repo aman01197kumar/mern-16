@@ -23,6 +23,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const products = [
     { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -39,6 +40,7 @@ const callsToAction = [
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navigate = useNavigate()
+     const { products } = useSelector(state => state.productSlice);
 
     return (
         <header className="bg-white">
@@ -65,11 +67,11 @@ export default function Header() {
                 </div>
                 <PopoverGroup className="hidden lg:flex lg:gap-x-12">
 
-                    <div onClick={() => navigate('/products')} className="text-sm/6 font-semibold text-gray-900">
+                    <div onClick={() => navigate('/')} className="text-sm/6 font-semibold text-gray-900">
                         Home
                     </div>
-                    <div onClick={() => navigate('/cart')} className="text-sm/6 font-semibold text-gray-900">
-                        Cart
+                    <div onClick={() => navigate('/cart')} className="text-sm/6 font-semibold text-gray-900 relative">
+                        Cart<span className='bg-red-500 text-white absolute -top-3 px-2 rounded-xl'>{products.length}</span>
                     </div>
                 </PopoverGroup>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">

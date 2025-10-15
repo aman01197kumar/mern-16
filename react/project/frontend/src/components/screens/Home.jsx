@@ -1,38 +1,70 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { products } from '../../assets/data'
 import Header from '../utilities/Header'
 import axios from 'axios'
-import Card from '../utilities/Card'
+import { useDispatch } from 'react-redux'
+import { addCategories } from '../../redux/products'
 
 const Home = () => {
   const [data, setData] = useState([])
+  // const [product, setProduct] = useState({})
   const navigate = useNavigate()
-  const [product, setProduct] = useState({})
+  const dispatch = useDispatch()
 
   const fetchData = async () => {
     const response = await axios.get('https://dummyjson.com/products')
     // console.log(response?.data?.products, 'response');
-    setData(response?.data?.products)
+    const categories = response?.data?.products
+    // const categorizedProducts = {};
+
+    // for (let item of categories) {
+    //   const category = item.category;
+
+    //   // If category doesn't exist yet, create a new array
+    //   if (!categorizedProducts[category]) {
+    //     categorizedProducts[category] = [];
+    //   }
+
+    //   // Push the item into the corresponding category
+    //   categorizedProducts[category].push(item);
+    // }
+    const categorized = categories.reduce((acc, item) => {
+      (acc[item.category] = acc[item.category] || []).push(item);
+      return acc;
+    }, {});
+
+    setData(categorized)
+    dispatch(addCategories(categorized))
   }
 
   useEffect(() => { fetchData() }, [])
+
+  const onClickHandler = (data, category) => {
+    // dispatch(addProducts(data))
+    navigate(`/products/${category}`)
+  }
+
   return (
     <>
       <Header />
-      <div className='grid md:grid-cols-3 gap-5'>
+      <div className='p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {
-          data?.map(({ id, title, images, price, description }) => (
 
-            <Card images={images} 
-            title={title} 
-            price={price} 
-            description={description} 
-            id={id} 
-            setProduct={setProduct} />
+          Object.keys(data).map(category => (
+            <div key={category} className='p-4 border rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out flex items-center flex-col cursor-pointer'
+              onClick={() => onClickHandler(data[category], category)}
+            >
+              <img
+                src={data[category][0].images[0]}
+                alt={`${category} category`}
+                className='w-full h-48 object-cover'
+              />
+              <h2 className='text-xl font-bold capitalize mt-4'>{category}</h2>
 
+            </div>
           ))
         }
+
       </div>
     </>
   )
