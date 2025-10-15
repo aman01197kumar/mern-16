@@ -14,19 +14,15 @@ export const productSlice = createSlice({
 
         addProducts: (state, action) => {
             const existingProduct = state.products.find(item => item.id === action.payload.id);
-            if (existingProduct) {
-                existingProduct.count += 1;
-            } else {
+            existingProduct ?
+                existingProduct.count += 1 :
                 state.products.push({ ...action.payload, count: 1 });
-            }
         },
         minusProduct: (state, action) => {
             const existingProduct = state.products.find(item => item.id === action.payload.id)
             if (existingProduct) {
-
-                if (existingProduct.count > 1)
-                    existingProduct.count -= 1
-                else
+                existingProduct.count > 1 ?
+                    existingProduct.count -= 1 :
                     state.products = state.products.filter(item => item.id !== action.payload.id)
             }
 
@@ -43,7 +39,6 @@ export const productSlice = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
 export const { addProducts, displayProductDetails, addCategories, deleteProduct, minusProduct } = productSlice.actions
 
 export default productSlice.reducer
