@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 const Signup = () => {
   // const [contact, setContact] = useState(null)
@@ -26,25 +27,34 @@ const Signup = () => {
   // const lastNameHandler = (e) => setLastName(e.target.value)
   // const contactHandler = (e) => setContact(e.target.value)
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
 
 
     const { firstName, lastName, contact, email, password } = myDetails
-    if (firstName.length < 4 || lastName.length < 4 || contact.length < 4 || email.length < 4 || password.length < 4 || confirmPassword.length < 4) {
-      return toast.error('check the inputs!!!')
+    // if (firstName.length < 4 || lastName.length < 4 || contact.length < 4 || email.length < 4 || password.length < 4 || confirmPassword.length < 4) {
+    //   return toast.error('check the inputs!!!')
 
+    // }
+
+    // if (password !== confirmPassword) {
+    //   return toast.error('passwords do not match')
+
+    // }
+    // const regex = /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/;
+    // if (!regex.test(email)) {
+    //   return toast.error('fill the correct email')
+
+    // }
+    try {
+      const response = await axios.post('http://localhost:3000/signup', myDetails)
+      if (response?.data?.success) {
+        toast.success(response?.data?.message)
+        navigate('/login')
+      }
     }
-
-    if (password !== confirmPassword) {
-      return toast.error('passwords do not match')
-
+    catch (err) {
+      toast.error(err?.response?.data?.message)
     }
-    const regex = /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/;
-    if (!regex.test(email)) {
-      return toast.error('fill the correct email')
-
-    }
-    navigate('/login')
   }
 
   return (

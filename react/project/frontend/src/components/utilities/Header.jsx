@@ -39,8 +39,28 @@ const callsToAction = [
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
     const navigate = useNavigate()
-     const { products } = useSelector(state => state.productSlice);
+    const { products } = useSelector(state => state.productSlice);
+    const token = localStorage.getItem('token')
+    // console.log(JSON.parse(token),'token');
+
+    // const onClickHandler = () => {
+    //     if (token) {
+    //         setText('logout')
+    //         navigate('/login')
+    //     }
+    //     else {
+    //         setText('login')
+    //     }
+    // }
+
+    const text = token ? 'Logout' : 'Login'
+
+    const onClickHandler = () =>{
+         localStorage.removeItem('token')
+         navigate('/login')
+    }
 
     return (
         <header className="bg-white">
@@ -75,8 +95,10 @@ export default function Header() {
                     </div>
                 </PopoverGroup>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <div onClick={() => navigate('/login')} className="text-sm/6 font-semibold text-gray-900">
-                        Log in <span aria-hidden="true">&rarr;</span>
+                    <div
+                        onClick={onClickHandler}
+                        className="text-sm/6 font-semibold text-gray-900">
+                        {text} <span aria-hidden="true">&rarr;</span>
                     </div>
                 </div>
             </nav>
@@ -123,19 +145,19 @@ export default function Header() {
                                     </DisclosurePanel>
                                 </Disclosure>
                                 <div
-                                   
+
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                                 >
                                     Features
                                 </div>
                                 <div
-                                   
+
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                                 >
                                     Marketplace
                                 </div>
                                 <div
-                                   
+
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                                 >
                                     Company

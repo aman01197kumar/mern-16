@@ -7,10 +7,11 @@ dotenv.config()
 const signup = async (req, res) => {
     try {
 
-        const { username, password, email, contact } = req.body
-        if (!username || !password || !email || !contact)
+        const { firstName,lastName, password, email, contact } = req.body
+        if (!firstName ||!lastName || !password || !email || !contact)
             return res.status(400).json({ message: 'check all the fields correctly!!', success: false })
 
+        const username = `${firstName} ${lastName}`
         const salt_val = 10
         const hashedPassword = await bcryptjs.hash(password, salt_val)
 

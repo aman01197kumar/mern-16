@@ -1,0 +1,112 @@
+Cart.js
+import { useEffect } from "react"
+import axios from "axios"
+
+const Cart = () => {
+  useEffect(() => {
+    const fetchCart = async () => {
+      const token = localStorage.getItem("token")
+
+      try {
+        const res = await axios.get("http://localhost:5000/api/cart", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        console.log("Cart Data:", res.data)
+      } catch (err) {
+        console.error("Error fetching cart", err)
+      }
+    }
+
+    fetchCart()
+  }, [])
+
+  return <div>Your Cart Page</div>
+}
+
+export default Cart
+
+
+Login.jsx
+
+import { useState } from "react"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+
+const Login = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const navigate = useNavigate()
+
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/login", {
+        email,
+        password
+      })
+
+      localStorage.setItem("token", res.data.token)
+      navigate("/cart")
+    } catch (err) {
+      console.error("Login failed", err)
+    }
+  }
+
+  return (
+    <div>
+      <input 
+        type="email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        placeholder="Email" 
+      />
+      <input 
+        type="password" 
+        value={password} 
+        onChange={(e) => setPassword(e.target.value)} 
+        placeholder="Password" 
+      />
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  )
+}
+
+export default Login
+
+
+App.jsx
+
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./screens/Home"
+import Header from "./components/Header"
+import ProductDetails from "./screens/ProductDetails"
+import Cart from "./screens/Cart"
+import ProtectedRoute from "./components/ProtectedRoute"
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='product/:id' element={<ProductDetails />} />
+        <Route 
+          path='cart' 
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
+
+
+
